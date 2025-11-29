@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Articles Classifiés Envoyés</title>
+    
+</head>
+<body>
+    <h1>Articles Classifiés !</h1>
+    <p>Les articles classifiés ont été stockés dans l'excel à télécharger ci-dessous</p>
+    <p>Période sélectionnée : {{ start_date }} - {{ end_date }}</p>
+    <p>Sources sélectionnées : 
+        {% if selected_sources %}
+            {{ selected_sources|join:", " }}
+        {% else %}
+            Toutes les sources
+        {% endif %}
+    </p> 
+    <p>Fini en  {{ temps }} </p>
+    <p>Nombre d'articles retournés : {{ nombre_articles }}</p>
+    <p>Tokens utilisés : {{ total_tokens_used }}</p>
+    <p>Coût en $ : {{ total_cost_used }}</p>
+
+    <br> <br>
+    <a href="{% url 'download_excel' %}">Télécharger le fichier Excel</a>
+    <br><br>
+    <a href="/">Retour à l'accueil</a>
+    <br><br>
+   
+    <br><br>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr style="background-color: #005f99; color: #ffffff;">
+                <th style="border: 1px solid #003f66; padding: 8px;">Titre</th>
+                <th style="border: 1px solid #003f66; padding: 8px;">Label</th>
+                <th style="border: 1px solid #003f66; padding: 8px;">Expressions Détectées</th>
+                <th style="border: 1px solid #003f66; padding: 8px;">Date de publication</th>
+                <th style="border: 1px solid #003f66; padding: 8px;">Code source</th>
+                <th style="border: 1px solid #003f66; padding: 8px;">Éditeur</th>
+                <th style="border: 1px solid #003f66; padding: 8px;">Contenu</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in classified_data %}
+            <tr style="border: 1px solid #003f66;">
+                <td style="border: 1px solid #003f66; padding: 8px;">{{ article.title }}</td>
+                <td style="border: 1px solid #003f66; padding: 8px;">{{ article.label }}</td>
+                <td style="border: 1px solid #003f66; padding: 8px;">
+                    {% if article.expressions_detectees %}
+                        {{ article.expressions_detectees }}
+                    {% else %}
+                        Aucune expression détectée
+                    {% endif %}
+                </td>
+                <td style="border: 1px solid #003f66; padding: 8px;">{{ article.publication_date }}</td>
+                <td style="border: 1px solid #003f66; padding: 8px;">{{ article.source_code }}</td>
+                <td style="border: 1px solid #003f66; padding: 8px;">{{ article.publisher }}</td>
+                <td style="border: 1px solid #003f66; padding: 8px;">{{ article.content }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="/">Retour à l'accueil</a>
+</body>
+</html>

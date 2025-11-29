@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modification des expressions LCB-FT clés</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>Télécharger un fichier Excel</h1>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Mettre à jour les expressions clés</button>
+    </form>
+    <br>
+    <!-- Bouton pour rediriger vers le menu principal -->
+    
+    <a href="/"  >Retour au menu principal</a>
+    <br><br>
+    <a href="/keywords/list/">Afficher la liste des mots-clés</a>
+    
+</body>
+</html>

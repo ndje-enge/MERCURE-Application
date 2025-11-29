@@ -1,0 +1,3 @@
+# Pytest requirements
+pytest-django
+pytest-env

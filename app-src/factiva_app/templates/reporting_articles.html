@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Création du reporting</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+</head>
+<body>
+    <h1>Création du reporting</h1>
+    <form method="post" action="/factiva/reporting_articles/" enctype="multipart/form-data" target="_blank">
+        {% csrf_token %}
+        <label for="start_date">Date de début :</label>
+        <input type="date" id="start_date" name="start_date">
+        <br><br>
+        <label for="end_date">Date de fin :</label>
+        <input type="date" id="end_date" name="end_date">
+        <br><br>
+        <label for="sources">Choisir les sources :</label>
+        <select id="sources" name="sources" multiple>
+            <option value="all">Tous</option>
+            {% for source in sources %}
+            <option value="{{ source }}">{{ source }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <button type="submit" class="button">Générer le reporting</button>
+    </form>
+    <br><br>
+    
+    <a href="/">Retour à l'accueil</a>
+<!-- 
+    Barre de progression
+    <div class="progress-container">
+        <div id="progress-bar" class="progress-bar">0%</div>
+    </div> -->
+<!-- 
+    <script>
+        function startProgress(event) {
+            event.preventDefault(); // Empêcher la soumission normale du formulaire
+
+            const progressBar = document.getElementById("progress-bar");
+            const formData = new FormData(event.target);
+
+            // Envoyer une requête AJAX pour démarrer le reporting
+            fetch("/factiva/reporting_articles/", {
+                method: "POST",
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.progress) {
+                    progressBar.style.width = data.progress + "%";
+                    progressBar.textContent = data.progress + "%";
+                }
+            })
+            .catch(error => console.error("Erreur :", error));
+        }
+    </script> -->
+</body>
+</html>

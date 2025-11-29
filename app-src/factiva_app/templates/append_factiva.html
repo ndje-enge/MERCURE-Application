@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajouter des données Factiva</title>
+    <script>
+        function uploadFile(event) {
+            event.preventDefault(); // Empêche le rechargement de la page
+            const form = document.getElementById("appendForm");
+            const formData = new FormData(form);
+            const xhr = new XMLHttpRequest();
+
+            // Mettre à jour la barre d'avancement
+            xhr.upload.addEventListener("progress", function(event) {
+                if (event.lengthComputable) {
+                    const percentComplete = (event.loaded / event.total) * 100;
+                    document.getElementById("progressBar").value = percentComplete;
+                }
+            });
+
+            // Gérer la réponse du serveur
+            xhr.addEventListener("load", function() {
+                if (xhr.status === 200) {
+                    alert("Fichier ajouté avec succès !");
+                    document.getElementById("progressBar").value = 0; // Réinitialiser la barre
+                } else {
+                    alert("Erreur lors de l'ajout du fichier.");
+                }
+            });
+
+            // Envoyer la requête
+            xhr.open("POST", form.action);
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}"); // Ajouter le token CSRF
+            xhr.send(formData);
+        }
+    </script>
+</head>
+<body>
+    <h1>Ajouter des données Factiva</h1>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <form id="appendForm" method="post" action="/factiva/append/" enctype="multipart/form-data" onsubmit="uploadFile(event)">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Ajouter les données</button>
+    </form>
+    <br>
+    <progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
+    <br>
+    <a href="/" class="button">Retour à l'accueil</a>
+</body>
+</html>

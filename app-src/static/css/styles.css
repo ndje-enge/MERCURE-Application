@@ -1,0 +1,62 @@
+/* Style général */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #aaaabe; /* Blanc cassé */
+    color: #e0e1dd; /* Blanc cassé */
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #00aaff; /* Bleu néon */
+    margin-top: 20px;
+    font-size: 2.5em;
+    text-shadow: 0 0 10px #00aaff, 0 0 20px #00aaff;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+li {
+    margin: 15px 0;
+}
+
+a {
+    text-decoration: none;
+    color: #e0e1dd;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    display: block;
+    text-align: center;
+    background: linear-gradient(90deg, #005f99, #003f66);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5), 0 0 10px #003f66 inset;
+    transition: all 0.3s ease-in-out;
+}
+
+a:hover {
+    background: linear-gradient(90deg, #007acc, #005f99);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.5), 0 0 15px #007acc inset;
+    transform: scale(1.05);
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #aaaabe;
+    font-size: 0.9em;
+}
+
+footer a {
+    color: #00aaff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

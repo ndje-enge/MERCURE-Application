@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <!-- <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Base de données des articles</title>
+</head>
+<body>
+    <h1>Base de données des articles</h1>
+    <p>Période sélectionnée : {{ start_date }} - {{ end_date }}</p>
+    <br><br>
+    <p>Nombre d'articles retournés : {{ nombre_articles }}</p>
+    <br><br>
+    <a href="{% url 'download_excel' %}">Télécharger le fichier Excel</a>
+    <br><br>
+    <a href="/">Retour à l'accueil</a>
+    <br><br>
+    
+    <br><br>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr style="background-color: #005f99; color: #ffffff;">
+                <th style="border: 1px solid #003f66; padding: 8px;">Titre</th>
+                <th style="border: 1px solid #003f66; padding: 8px;">Nom de la source</th>
+                <th style="border: 1px solid #003f66; padding: 8px;">Nom de l'éditeur</th>
+                <th style="border: 1px solid #003f66; padding: 8px;">Code source</th>
+                <th style="border: 1px solid #003f66; padding: 8px;">Date de publication</th>
+                <th style="border: 1px solid #003f66; padding: 8px;">Contenu</th>
+
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in factiva_data %}
+            <tr>
+                <td style="border: 1px solid #003f66; padding: 8px;">{{ data.title }}</a></td>
+                <td style="border: 1px solid #003f66; padding: 8px;">{{ data.nom_source }}</td>
+                <td style="border: 1px solid #003f66; padding: 8px;">{{ data.publisher }}</td>
+                <td style="border: 1px solid #003f66; padding: 8px;">{{ data.source_code }}</td>
+                <td style="border: 1px solid #003f66; padding: 8px;">{{ data.publication_date }}</td>
+                <td style="border: 1px solid #003f66; padding: 8px;">{{ data.content }}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

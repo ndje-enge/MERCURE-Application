@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles Classifiés</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>Afficher les articles classifiés</h1>
+    <form method="post" action="/factiva/classified-articles/" enctype="multipart/form-data" target="_blank">
+        {% csrf_token %}
+        <label for="start_date">Date de début :</label>
+        <input type="date" id="start_date" name="start_date">
+        <br><br>
+        <label for="end_date">Date de fin :</label>
+        <input type="date" id="end_date" name="end_date">
+        <br><br>
+        <label for="sources">Choisir les sources :</label>
+        <select id="sources" name="sources" multiple>
+            <option value="all">Tous</option>
+            {% for source in sources %}
+            <option value="{{ source }}" {% if source in selected_sources %}selected{% endif %}>{{ source }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <label for="relevance">Choisir la pertinence :</label>
+        <select id="relevance" name="relevance">
+            <option value="all" {% if selected_relevance == "all" %}selected{% endif %}>Tous</option>
+            <option value="oui" {% if selected_relevance == "oui" %}selected{% endif %}>Pertinents</option>
+            <option value="non" {% if selected_relevance == "non" %}selected{% endif %}>Non pertinents</option>
+        </select>
+        <br><br>
+        <button type="submit" class="button">Afficher les articles classifiés</button>
+    </form>
+    <br><br>
+    
+    <!-- Lien pour supprimer les articles classifiés -->
+    <a href="/factiva/supp2/" class="button" onclick="return confirm('Êtes-vous sûr de vouloir supprimer tous les articles classifiés ?');">
+        Supprimer les articles classifiés
+    </a>
+    <br><br>
+    
+    <a href="/" class="button">Retour à l'accueil</a>
+    <br><br>

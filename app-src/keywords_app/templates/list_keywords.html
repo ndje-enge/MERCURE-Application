@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    
+    <!-- <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Liste des mots-clés</title>
+    
+</head>
+<body>
+    <a href="/" >Retour au menu principal</a>
+    <h1>Liste des mots-clés</h1>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr style="background-color: #005f99; color: #ffffff;">
+                <th style="border: 1px solid #003f66; padding: 8px;">Mots-clés</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for keyword in keywords %}
+            <tr>
+                <td style="border: 1px solid #003f66; padding: 8px;">{{ keyword.word }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="/" >Retour au menu principal</a>
+</body>
+</html>

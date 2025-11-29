@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classification des titres Factiva</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>Classification des titres Factiva</h1>
+    <div class="content">
+        <p>Période sélectionnée : {{ start_date }} - {{ end_date }}</p>
+        <p>Sources sélectionnées : 
+            {% if selected_sources %}
+                {{ selected_sources|join:", " }}
+            {% else %}
+                Toutes les sources
+            {% endif %}
+        </p>
+        <br><br>
+        <a href="/" class="button">Retour à l'accueil</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Label</th>
+                    <th>Date de publication</th>
+                    <th>Nom de la source</th>
+                    <th>Code source</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in classified_data %}
+                <tr>
+                    <td><a href="{% url 'article_detail' data.id %}" class="table-link">{{ data.title }}</a></td>
+                    <td>{{ data.label }}</td>
+                    <td>{{ data.publication_date }}</td>
+                    <td>{{ data.nom_source }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <a href="/" class="button">Retour à l'accueil</a>
+    </div>
+    <footer>
+        <p>© Pour une gestion efficace de la veille LCB-FT.</p>
+        <p><a href="https://www.example.com">Modop</a></p>
+    </footer>
+</body>
+</html>
